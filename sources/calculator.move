@@ -12,8 +12,8 @@ module metaschool::calculator_l05
         
         let my_message = utf8(b"I am a Calculator dApp");
 
-        if (exists<Message>(signer::address_of(0x1262810a816be93426e1d8848065ef3f490bca8a26b0a9f065ec796171b8abca))){
-            let message = borrow_global_mut<Message>(signer::address_of(0x1262810a816be93426e1d8848065ef3f490bca8a26b0a9f065ec796171b8abca));
+        if (exists<Message>(signer::address_of(account))){
+            let message = borrow_global_mut<Message>(signer::address_of(account));
             message.my_message = my_message;
         }
         else {
@@ -25,7 +25,7 @@ module metaschool::calculator_l05
     }
 
     public fun get_message(account: &signer): String acquires Message {
-        let calculator = borrow_global<Message>(signer::address_of(0x1262810a816be93426e1d8848065ef3f490bca8a26b0a9f065ec796171b8abca));
+        let calculator = borrow_global<Message>(signer::address_of(account));
         calculator.my_message
     }
 }
